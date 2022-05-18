@@ -1,0 +1,19 @@
+@use '/src/styles/constants/colors';
+
+.list {
+  border-radius: 20px;
+  background-color: colors.$WHITE;
+  flex-direction: column;
+  display: flex;
+  width: 700px;
+  margin-top: 8px;
+  padding: 24px 24px 16px;
+}
+
+.title {
+  color: colors.$SEARCH_LIST_ITEM_COLOR;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.018em;
+  line-height: 1.6;
+}

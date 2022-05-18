@@ -1,0 +1,19 @@
+@use '/src/styles/constants/colors';
+
+.listItem {
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+  display: flex;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  cursor: pointer;
+
+  path {
+    fill: colors.$GRAY6;
+  }
+
+  p {
+    margin-left: 10px;
+  }
+}
