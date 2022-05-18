@@ -30,15 +30,20 @@ axios.interceptors.request.use((req) => {
 })
 
 axios.interceptors.response.use((res: AxiosResponse<OriginApiResult>) => {
-  try {
-    return {
-      ...res,
-      data: {
-        items: res.data.response.body.items.item ?? [],
-      },
-    }
-  } catch {
-    return { ...res, data: { items: [] } }
+  const { data } = res
+  let items
+  if (Array.isArray(data.response.body.items.item)) {
+    items = data.response.body.items.item
+  } else if (typeof data.response.body.items.item === 'object') {
+    items = [data.response.body.items.item]
+  } else if (typeof data.response.body.items === 'string') {
+    throw new Error('검색어 없음')
+  }
+  return {
+    ...res,
+    data: {
+      items,
+    },
   }
 })
 
