@@ -22,16 +22,23 @@ interface OriginApiResult {
   }
 }
 
+axios.interceptors.request.use((req) => {
+  const { searchText } = req.params
+  console.log(`${searchText} 데이터 호출`)
+
+  return req
+})
+
 axios.interceptors.response.use((res: AxiosResponse<OriginApiResult>) => {
   try {
     return {
       ...res,
       data: {
-        items: res.data.response.body.items.item,
+        items: res.data.response.body.items.item ?? [],
       },
     }
   } catch {
-    return res
+    return { ...res, data: { items: [] } }
   }
 })
 

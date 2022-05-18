@@ -4,13 +4,16 @@
   border-radius: 20px;
   background-color: colors.$WHITE;
   flex-direction: column;
+  align-items: center;
   display: flex;
   width: 700px;
   margin-top: 8px;
   padding: 24px 24px 16px;
+  min-height: 200px;
 }
 
 .title {
+  width: 100%;
   color: colors.$SEARCH_LIST_ITEM_COLOR;
   font-size: 13px;
   font-weight: 400;

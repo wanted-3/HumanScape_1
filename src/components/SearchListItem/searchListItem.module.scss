@@ -1,6 +1,7 @@
 @use '/src/styles/constants/colors';
 
 .listItem {
+  width: 100%;
   flex-direction: row;
   -webkit-box-align: center;
   align-items: center;

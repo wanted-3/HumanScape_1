@@ -8,9 +8,12 @@ const DISEASE_BASE_URL = '/B551182/diseaseInfoService/getDissNameCodeList?sickTy
 
 type QueryKey = [typeof QUERY_KEYS['SEARCH'], { s: string }]
 
-const getDiseaseName: QueryFunction<AxiosResponse<Item[]>, QueryKey> = (context) => {
+const getDiseaseName: QueryFunction<AxiosResponse<{ items: Item[] }>, QueryKey> = (context) => {
   const { queryKey } = context
   const [, { s }] = queryKey
+  if (s === '') {
+    throw new Error('검색어 없음')
+  }
 
   return axios({
     method: 'GET',

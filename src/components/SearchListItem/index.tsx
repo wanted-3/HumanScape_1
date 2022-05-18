@@ -2,11 +2,15 @@ import { SearchIcon } from '../../assets/svgs'
 import { cx } from '../../styles'
 import styles from './searchListItem.module.scss'
 
-const SearchListItem = () => {
+type Props = {
+  title: string
+}
+
+const SearchListItem = ({ title }: Props) => {
   return (
     <li className={cx(styles.listItem)}>
       <SearchIcon />
-      <p>hi</p>
+      <p>{title}</p>
     </li>
   )
 }

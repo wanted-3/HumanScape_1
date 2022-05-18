@@ -13,13 +13,16 @@ const SearchBar = () => {
   const dispatch = useDispatch()
   const inputSearch = useSelector((state: RootState) => state.searchReducer.search)
 
-  useQuery([QUERY_KEYS.SEARCH, { s: inputSearch }], getDiseaseName)
+  useQuery([QUERY_KEYS.SEARCH, { s: inputSearch }], getDiseaseName, {
+    retry: 0,
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  })
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const {
       target: { value },
     } = e
-
     dispatch(setSearchInput(value))
   }
 
@@ -27,6 +30,7 @@ const SearchBar = () => {
     <form>
       <div className={cx(styles.input)}>
         <SearchIcon />
+
         <input type='text' placeholder='질환명을 입력해 주세요.' onChange={handleChange} value={inputSearch} />
       </div>
       <button type='submit'>검색</button>
