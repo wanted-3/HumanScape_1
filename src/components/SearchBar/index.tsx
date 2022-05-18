@@ -1,37 +1,50 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, FormEventHandler, useCallback } from 'react'
 import { useQuery } from 'react-query'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDiseaseName } from '../../api/getDiseaseName'
 import { SearchIcon } from '../../assets/svgs'
 import QUERY_KEYS from '../../modules/reactQuery/queryKeys'
-import { setSearchInput } from '../../modules/redux/slice'
+import { setInputString, setSearchString } from '../../modules/redux/slice'
 import { RootState } from '../../modules/redux/store'
 import { cx } from '../../styles'
+import useDebounce from '../../utils'
 import styles from './searchBar.module.scss'
 
 const SearchBar = () => {
   const dispatch = useDispatch()
-  const inputSearch = useSelector((state: RootState) => state.searchReducer.search)
+  const searchString = useSelector((state: RootState) => state.searchReducer.searchString)
+  const inputString = useSelector((state: RootState) => state.searchReducer.inputString)
 
-  useQuery([QUERY_KEYS.SEARCH, { s: inputSearch }], getDiseaseName, {
+  const debounceCallback = useCallback(() => {
+    dispatch(setSearchString(inputString.trim()))
+  }, [dispatch, inputString])
+
+  useDebounce(debounceCallback)
+
+  useQuery([QUERY_KEYS.SEARCH, { s: searchString }], getDiseaseName, {
     retry: 0,
     staleTime: Infinity,
     cacheTime: Infinity,
   })
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     const {
       target: { value },
     } = e
-    dispatch(setSearchInput(value))
+    dispatch(setInputString(value))
+  }
+
+  const handleSubmit: FormEventHandler = (e) => {
+    e.preventDefault()
+    // eslint-disable-next-line no-alert
+    alert('submit')
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className={cx(styles.input)}>
         <SearchIcon />
-
-        <input type='text' placeholder='질환명을 입력해 주세요.' onChange={handleChange} value={inputSearch} />
+        <input type='text' placeholder='질환명을 입력해 주세요.' onChange={handleInputChange} value={inputString} />
       </div>
       <button type='submit'>검색</button>
     </form>

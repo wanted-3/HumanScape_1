@@ -9,8 +9,8 @@ import Spinner from '../Spinner'
 import styles from './searchList.module.scss'
 
 const SearchList = () => {
-  const inputSearch = useSelector((state: RootState) => state.searchReducer.search)
-  // 키값에 대한 데이터 구독
+  const inputSearch = useSelector((state: RootState) => state.searchReducer.searchString)
+
   const { data, isLoading, error, isError } = useQuery([QUERY_KEYS.SEARCH, { s: inputSearch }], getDiseaseName, {
     staleTime: Infinity,
     cacheTime: Infinity,
@@ -21,6 +21,14 @@ const SearchList = () => {
     return (
       <div className={cx(styles.list)}>
         <p>{e.message}</p>
+      </div>
+    )
+  }
+
+  if (data?.data.items.length === 0) {
+    return (
+      <div className={cx(styles.list)}>
+        <p>검색어 없음</p>
       </div>
     )
   }

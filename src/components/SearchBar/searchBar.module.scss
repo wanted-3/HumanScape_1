@@ -54,5 +54,9 @@ form {
     padding-top: 18px;
     padding-bottom: 18px;
     cursor: pointer;
+    &:focus,
+    &:focus-visible {
+      outline: 2px solid blue;
+    }
   }
 }

@@ -31,6 +31,7 @@
 .ball:nth-child(3) {
   animation-delay: 0.32s;
 }
+
 @keyframes bounce {
   from {
     transform: scaleX(1.25);

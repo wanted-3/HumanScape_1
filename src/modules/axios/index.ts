@@ -4,7 +4,6 @@ import a, { AxiosResponse } from 'axios'
 // const baseURL = 'https://apis.data.go.kr'
 
 const axios = a.create({ baseURL: '' })
-
 interface OriginApiResult {
   response: {
     header: {
@@ -23,21 +22,19 @@ interface OriginApiResult {
 }
 
 axios.interceptors.request.use((req) => {
-  const { searchText } = req.params
-  console.log(`${searchText} 데이터 호출`)
-
+  console.log(`"${req.params.searchText}" 호출됨`)
   return req
 })
-
 axios.interceptors.response.use((res: AxiosResponse<OriginApiResult>) => {
   const { data } = res
+
   let items
   if (Array.isArray(data.response.body.items.item)) {
     items = data.response.body.items.item
   } else if (typeof data.response.body.items.item === 'object') {
     items = [data.response.body.items.item]
   } else if (typeof data.response.body.items === 'string') {
-    throw new Error('검색어 없음')
+    items = []
   }
   return {
     ...res,

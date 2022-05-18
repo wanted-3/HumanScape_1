@@ -1,5 +1,4 @@
 @use '/src/styles/constants/colors';
-
 .listItem {
   width: 100%;
   flex-direction: row;
@@ -8,7 +7,13 @@
   display: flex;
   padding-top: 8px;
   padding-bottom: 8px;
+  border-radius: 5px;
   cursor: pointer;
+
+  &:focus,
+  &:focus-visible {
+    background-color: colors.$GRAYE;
+  }
 
   path {
     fill: colors.$GRAY6;

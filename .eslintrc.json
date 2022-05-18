@@ -18,7 +18,7 @@
     }
   },
   "rules": {
-    "no-console":"off",
+    "no-console": "off",
     "arrow-body-style": "off",
     "semi": ["warn", "never"],
     "react/function-component-definition": [

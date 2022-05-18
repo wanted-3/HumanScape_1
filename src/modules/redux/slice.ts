@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
-  search: '',
+  searchString: '',
+  inputString: '',
 }
 
 type State = typeof initialState
@@ -9,9 +10,13 @@ type State = typeof initialState
 const reducers = {
   // actions 선언
 
-  setSearchInput: (state: State, action: PayloadAction<string>) => {
-    const search = action.payload
-    return { ...state, search }
+  setSearchString: (state: State, action: PayloadAction<string>) => {
+    const searchString = action.payload
+    return { ...state, searchString }
+  },
+  setInputString: (state: State, action: PayloadAction<string>) => {
+    const inputString = action.payload
+    return { ...state, inputString }
   },
 }
 
@@ -23,6 +28,6 @@ const { actions, reducer } = createSlice({
 
 const searchReducer = reducer
 
-export const { setSearchInput } = actions
+export const { setSearchString, setInputString } = actions
 
 export default searchReducer

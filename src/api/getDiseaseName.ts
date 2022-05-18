@@ -8,7 +8,8 @@ const DISEASE_BASE_URL = '/B551182/diseaseInfoService/getDissNameCodeList?sickTy
 
 type QueryKey = [typeof QUERY_KEYS['SEARCH'], { s: string }]
 
-const getDiseaseName: QueryFunction<AxiosResponse<{ items: Item[] }>, QueryKey> = (context) => {
+type GetDiseaseName = QueryFunction<AxiosResponse<{ items: Item[] }>, QueryKey>
+const getDiseaseName: GetDiseaseName = (context) => {
   const { queryKey } = context
   const [, { s }] = queryKey
   if (s === '') {
