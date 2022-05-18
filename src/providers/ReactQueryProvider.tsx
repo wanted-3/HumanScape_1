@@ -10,7 +10,7 @@ type Props = {
 const ReactQueryProvider = ({ children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
+      {process.env.NODE_ENV === 'development' && <ReactQueryDevtools />}
       {children}
     </QueryClientProvider>
   )
