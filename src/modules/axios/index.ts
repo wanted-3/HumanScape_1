@@ -1,6 +1,5 @@
 import a, { AxiosResponse } from 'axios'
 
-// TODO:원래대로 바꾸기
 // const baseURL = 'https://apis.data.go.kr'
 
 const axios = a.create({ baseURL: '' })

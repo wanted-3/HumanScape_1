@@ -14,6 +14,7 @@ const SearchList = () => {
   const { data, isLoading, error, isError } = useQuery([QUERY_KEYS.SEARCH, { s: inputSearch }], getDiseaseName, {
     staleTime: Infinity,
     cacheTime: Infinity,
+    retry: 0,
   })
 
   if (isError) {
