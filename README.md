@@ -7,6 +7,7 @@
 <br/>
 
 ## 기술 스택
+
 |||||
 |:---:|:---:|:---:|:---:|
 |<img src="https://img.shields.io/badge/typescript-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white%22%3E" alt="typescript"/>|<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black%22/%3E" alt="react"/>|<img src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white%22/%3E" alt="redux"/>|<img src="https://img.shields.io/badge/react_query-CA4245.svg?style=for-the-badge&logo=reactquery&logoColor=white%22%3E" alt="react-query"/>|
@@ -34,15 +35,16 @@ src
 └─ utils  # 디바운싱 유틸기능을 넣은 폴더
 
 ```
+
 <br/>
 
 ## 진행과정
+
 **기간 : 5월 18일 ~ 20일**
 
-1일) 과제 요구사항 확인 및 설계 논의   
-2일) UI - 검색기능 - 상태값 관리 - 쿼리와 디바운싱 - highlight 등의 기능 구현 및 배포   
-3일) 리팩토링 및 퍼지 문자열 재도전 및 readme 작성   
-
+1일) 과제 요구사항 확인 및 설계 논의
+2일) UI - 검색기능 - 상태값 관리 - 쿼리와 디바운싱 - highlight 등의 기능 구현 및 배포
+3일) 리팩토링 및 퍼지 문자열 재도전 및 readme 작성
 
 <br/><br/>
 
@@ -55,7 +57,6 @@ src
 
 <br/>
 
-
 ## 실행방법  
 
 ### 1. 프로젝트 받아오기
@@ -63,24 +64,28 @@ src
 ```
 git clone https://github.com/wanted-3/HumanScape_1.git
 ```
+
 ### 2. 설치  
 
 ```sh
-yarn install -g && yarn start
+yarn install && yarn start
 ```
+
 yarn을 이용하여 프로젝트를 설치한다
 
 ```
 //.env
 
-REACT_APP_SECRET_KEY= <고유의 key값>
+REACT_APP_SECRET_KEY=<고유의 key값>
 ```
+
 .env파일에 [공공API](https://www.data.go.kr/data/15001675/openapi.do)에서 받은 API_KEY를 입력한다
 
 검색어를 입력하면 [공공API](https://www.data.go.kr/data/15001675/openapi.do)의 데이터를 불러오게 된다
 <br/>
 
 ### 3. 작동방법  
+
 <br/>
 
 |검색어 클릭|키보드 이동|
@@ -93,7 +98,6 @@ REACT_APP_SECRET_KEY= <고유의 key값>
 리스트로 이동 후 탭을 통해 지속적으로 이동할 수 있다  
 <br/><br/>
 
-
 ## 구현한 방법
 
 ### Debouncing기법과 redux, react-query를 활용한 검색 호출 최소화
@@ -101,7 +105,6 @@ REACT_APP_SECRET_KEY= <고유의 key값>
 - 유저가 키보드를 입력할때 마다 api를 호출하는것은 서버에 많은 부담을 주는것 같아 **Debouncing** 기법을 활용해 유저가 키보드에서 입력이 없다면 200ms 이후 서버로 요청이 가도록 구현했습니다.
 
 - **redux**를 활용해서 검색 input의 value의 즉각적인 처리를 하는 상태값과 react-query의 키와 연동되어 디바운싱 하는 상태값을 전역적으로 관리해주었습니다.
-
 
 ### 로컬캐싱
 
@@ -116,19 +119,18 @@ REACT_APP_SECRET_KEY= <고유의 key값>
 
 ### 스택 구현 이유
 
-원티드 과정을 통해 배우게 된 redux, react-query와 netlify 등을 프로젝트 단계에서 사용해보기 위해 결정했으며 redux의 미들웨어를 활용해서 비동기 작업을 일원화 하는 것보다 API 호출의 빈도를 낮추는 것이 이번 과제의 핵심이었기에 react-query를 이용한 캐시타임을 이용하는 것으로 결정했습니다.
+원티드 과정을 통해 배우게 된 redux, react-query와 netlify 등을 프로젝트 단계에서 사용해보기 위해 결정했으며 redux의 미들웨어를 활용해서 비동기 작업을 일원화 하는 것보다 API 호출의 빈도를 낮추는 것이 이번 과제의 핵심이었기에 react-query를 이용해 캐싱하는것으로 결정했습니다.
 
 <br/>
 
 ## 구현할 때 어려운 점
-처음 배우는 새로운 스택들(ex. reqact-query ...)로 프로젝트에 바로 사용하려는 점이 까다로웠습니다.
+
+처음 배우는 새로운 스택들(ex. react-query ...)로 프로젝트에 바로 사용하려는 점이 까다로웠습니다.
 
 ### 퍼지문자열
 
 영어가 아닌 한글은 초성,중성,종성으로 판단하여 검색기능을 구현해야했기에 어려웠습니다. 또한 'ㄱ'을 검색하면 ㄱ을 포함하는 API의 범위를 어디까지 호출해야하는지 등의 파생되는 많은 문제가 있었기에 어려웠습니다.
 
 ### api 호출 취소
-기존의 openAPI의 속도가 느려 input값을 받을 때 debounce걸게 되면 입력값이 들어가는 것이 delay가 걸려 API호출에 늦어지기 때문에 
-API요청시에 Axios의 CancelToken을 이용하여 debounce를 구현했었습니다. 여러번 들어가는 요청을 취소 할 수 있었으나, 요청 자체가 줄어드는 것이 아니였기 때문에 input값을 변경할 때 debounce를 거는 것으로 변경했습니다.  
 
-<br/><br/>
+기존에 api요청 취소를 axios의 CancelToken을 활용해 구현하려고 했습니다. 하지만 axios의 CancelToken을 활용해도 네트워크 탭에 요청내용이 빨갛게 남아 요청이 가지 않았다고 판단하기 애매하다고 생각해 input값에 debounce를 걸어 요청을 최소화 하는것으로 변경했습니다.
