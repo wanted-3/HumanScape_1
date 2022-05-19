@@ -47,6 +47,9 @@ yarn && yarn start
 ## 로컬캐싱
 
 - react-query를 활용해 데이터를 받아오는데 react-query unique한 키값을 기준으로 데이터를 캐싱합니다.
+## 어려웠던 점
+- 기존의 openAPI의 속도가 느려 input값을 받을 때 debounce걸게 되면 입력값이 들어가는 것이 delay가 걸려 API호출에 늦어지기 때문에 
+API요청시에 Axios의 CancelToken을 이용하여 debounce를 구현했었습니다. 여러번 들어가는 요청을 취소 할 수 있었으나, 요청 자체가 줄어드는 것이 아니였기 때문에 input값을 변경할 때 debounce를 거는 것으로 변경했습니다.  
 
 ## 순서도
 
