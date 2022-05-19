@@ -7,7 +7,7 @@ import QUERY_KEYS from '../../modules/reactQuery/queryKeys'
 import { setInputString, setSearchString } from '../../modules/redux/slice'
 import { RootState } from '../../modules/redux/store'
 import { cx } from '../../styles'
-import useDebounce from '../../utils'
+import useDebounce from '../../utils/useDebounce'
 import styles from './searchBar.module.scss'
 
 const SearchBar = () => {

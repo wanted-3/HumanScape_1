@@ -29,11 +29,11 @@ type Props = {
 const SearchListItem = ({ title }: Props) => {
   const dispatch = useDispatch()
   const inputString = useSelector((state: RootState) => state.searchReducer.inputString)
-  const handleLiClick: ReactEventHandler = () => {
+  const handleClick: ReactEventHandler = () => {
     dispatch(setInputString(title))
   }
 
-  const handleLiSelect: KeyboardEventHandler = (e) => {
+  const handleSelect: KeyboardEventHandler = (e) => {
     if (e.key === 'Enter') {
       dispatch(setInputString(title))
     }
@@ -41,7 +41,7 @@ const SearchListItem = ({ title }: Props) => {
 
   return (
     // FIXME:
-    <li tabIndex={0} className={cx(styles.listItem)} onClick={handleLiClick} onKeyDown={handleLiSelect}>
+    <li tabIndex={0} className={cx(styles.listItem)} onClick={handleClick} onKeyDown={handleSelect}>
       <SearchIcon />
       {/* eslint-disable-next-line react/no-danger */}
       <p dangerouslySetInnerHTML={{ __html: highlightedText(title, inputString) }} />
